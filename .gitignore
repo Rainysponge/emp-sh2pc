@@ -49,3 +49,4 @@ eigen/
 
 # VOLE COT data file
 data/
+*.log

@@ -1,3 +1,5 @@
+#include <ctime>
+#include <chrono>
 #include "emp-sh2pc/emp-sh2pc.h"
 using namespace emp;
 using namespace std;
@@ -5,7 +7,7 @@ const string circuit_file_location = macro_xstr(EMP_CIRCUIT_PATH);
 
 int port, party;
 string file = circuit_file_location+"/bristol_fashion/sha256.txt";
-BristolFashion cf(file.c_str());
+
 
 vector<Bit> cat_vector(vector<Bit> key, vector<Bit> plaintext){
 	vector<Bit> result = key; // 先复制 key
@@ -47,31 +49,40 @@ string biString2hexString(string str) {
         str = '0' + str;  // 在左侧补零
         len++;
     }
-
-    // 遍历每4位二进制字符串并转为十六进制
     for (int i = 0; i < len; i += 4) {
-        string byte_str = str.substr(i, 4);  // 每4位二进制
-        int byte_val = stoi(byte_str, nullptr, 2);  // 转换为十进制
-        ss << hex << setw(1) << setfill('0') << byte_val;  // 转为十六进制
+        string byte_str = str.substr(i, 4);
+        int byte_val = stoi(byte_str, nullptr, 2); 
+        ss << hex << setw(1) << setfill('0') << byte_val;
     }
     
     return ss.str();
 }
 
 void test() {
-	auto start = clock_start();
-	vector<Bit> message_block(512, Bit(false));
-	vector<Bit> hash_state(256, Bit(false));
+    std::srand(static_cast<unsigned int>(
+        std::chrono::system_clock::now().time_since_epoch().count()
+    ));
+    auto start1 = clock_start();
+	BristolFashion cf(file.c_str());
+	cout << "Time for Reading File and Creating Circuits: " << time_from(start1) << endl;
+	vector<Bit> message_block(512);
+	vector<Bit> hash_state(256);
+    for (auto& bit : message_block) {
+        bit = (rand() % 2) == 1;  // 0或1的随机值
+    }
+    for (auto& bit : hash_state) {
+        bit = (rand() % 2) == 1;
+    }
+
 	cout << "message block: 0x" << bits2hexString(message_block) << endl;
 	cout << "hash state   : 0x" << bits2hexString(hash_state) << endl;
 	Integer a(cat_vector(message_block, hash_state));
 
 	Integer c(256, 0, PUBLIC);
-
+    auto start2 = clock_start();
 	cf.compute((block*)c.bits.data(), (block*)a.bits.data());
 	cout << "ciphertext   : 0x"<< biString2hexString(c.reveal<string>()) << endl;
-	cout << time_from(start) <<endl;
-
+    cout << "Time for Computation: " << time_from(start2) << endl;
 }
 int main(int argc, char** argv) {
 	parse_party_and_port(argv, &party, &port);
