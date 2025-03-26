@@ -31,6 +31,9 @@
 	
 	because different parties need different numbers
 
+# Test AES128 & SHA256
+`bash test_aes_sha256.sh`
+
 ### Question
 Please send email to wangxiao@cs.northwestern.edu
 
