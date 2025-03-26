@@ -79,7 +79,8 @@ int main(int argc, char** argv) {
 
 	setup_semi_honest(io, party);
 	test();
-	
+  cout << "party " << party << ": send rounds: " << io->send_rounds << "; recv rounds: " << io->recv_rounds << endl;
+  cout << "party " << party << ": send bytes: " << io->send_bytes << "; recv bytes: " << io->recv_bytes << endl;
 	finalize_semi_honest();
 	delete io;
 }
