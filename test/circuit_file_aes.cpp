@@ -5,7 +5,7 @@ const string circuit_file_location = macro_xstr(EMP_CIRCUIT_PATH);
 
 int port, party;
 string file = circuit_file_location+"/bristol_fashion/aes_128.txt";
-BristolFashion cf(file.c_str());
+
 
 vector<Bit> cat_vector(vector<Bit> key, vector<Bit> plaintext){
 	vector<Bit> result = key; // 先复制 key
@@ -27,12 +27,22 @@ string reverse_string(string str){
 }
 
 void test() {
-	auto start = clock_start();
+	std::srand(static_cast<unsigned int>(
+        std::chrono::system_clock::now().time_since_epoch().count()
+    ));
+	auto start1 = clock_start();
+	BristolFashion cf(file.c_str());
+	cout << "Time for Reading File and Creating Circuits: " << time_from(start1) << endl;
+	
+	vector<Bit> key(128);
+    for (auto& bit : key) {
+        bit = (rand() % 2) == 1;
+    }
 
-	vector<Bit> key(128, Bit(false));
-	vector<Bit> plaintext(128, Bit(false));
-	key[126] = 1;
-	plaintext[127] = 1;
+    vector<Bit> plaintext(128);
+    for (auto& bit : plaintext) {
+        bit = (rand() % 2) == 1;
+    }
 	cout << "key      : " << bits2string(key) << endl;
 	cout << "plaintext: " << bits2string(plaintext) << endl;
 
@@ -40,11 +50,10 @@ void test() {
 	Integer a(bit_vec);
 
 	Integer c(128, 1, PUBLIC);
-
+	auto start2 = clock_start();
 	cf.compute((block*)c.bits.data(), (block*)a.bits.data());
 	cout << "ciphertext: "<<reverse_string(c.reveal<string>())<<endl;
-	cout << time_from(start)<<" "<< party << endl;
-
+	cout << "Time for Computation: " << time_from(start2) << endl;
 }
 int main(int argc, char** argv) {
 	parse_party_and_port(argv, &party, &port);

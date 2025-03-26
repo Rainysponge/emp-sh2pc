@@ -4,5 +4,6 @@ cd emp-sh2pc
 mkdir build
 cmake ..
 make
-./bin/test_circuit_file_aes 1 1234 & ./bin/test_circuit_file_aes 2 1234
-./bin/test_circuit_file_sha256 1 1234 & ./bin/test_circuit_file_sha256 2 1234
+cd ..
+bash aes_run.sh
+bash sha256_run.sh
