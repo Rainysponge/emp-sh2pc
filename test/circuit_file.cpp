@@ -13,7 +13,7 @@ void test() {
 	Integer b(128, 3, BOB);
 	Integer c(128, 1, PUBLIC);
 	for(int i = 0; i < 10000; ++i) {
-			cf.compute((block*)c.bits.data(), (block*)a.bits.data(), (block*)b.bits.data());
+		cf.compute((block*)c.bits.data(), (block*)a.bits.data(), (block*)b.bits.data());
 	}
 	cout << time_from(start)<<" "<<party<<" "<<c.reveal<string>(BOB)<<endl;
 
@@ -24,8 +24,8 @@ int main(int argc, char** argv) {
 
 	setup_semi_honest(io, party);
 	test();
-  cout << "party " << party << ": send rounds: " << io->send_rounds << "; recv rounds: " << io->recv_rounds << endl;
-  cout << "party " << party << ": send bytes: " << io->send_bytes << "; recv bytes: " << io->recv_bytes << endl;
+	cout << "party " << party << ": send rounds: " << io->send_rounds << "; recv rounds: " << io->recv_rounds << endl;
+	cout << "party " << party << ": send bytes: " << io->send_bytes << "; recv bytes: " << io->recv_bytes << endl;
 	finalize_semi_honest();
 	delete io;
 }

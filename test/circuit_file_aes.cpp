@@ -42,7 +42,8 @@ void test() {
 	Integer c(128, 1, PUBLIC);
 
 	cf.compute((block*)c.bits.data(), (block*)a.bits.data());
-	cout << time_from(start)<<" "<<party<<" "<<reverse_string(c.reveal<string>())<<endl;
+	cout << "ciphertext: "<<reverse_string(c.reveal<string>())<<endl;
+	cout << time_from(start)<<" "<< party << endl;
 
 }
 int main(int argc, char** argv) {
@@ -51,8 +52,8 @@ int main(int argc, char** argv) {
 
 	setup_semi_honest(io, party);
 	test();
-  cout << "party " << party << ": send rounds: " << io->send_rounds << "; recv rounds: " << io->recv_rounds << endl;
-  cout << "party " << party << ": send bytes: " << io->send_bytes << "; recv bytes: " << io->recv_bytes << endl;
+	cout << "party " << party << ": send rounds: " << io->send_rounds << "; recv rounds: " << io->recv_rounds << endl;
+	cout << "party " << party << ": send bytes: " << io->send_bytes << "; recv bytes: " << io->recv_bytes << endl;
 	finalize_semi_honest();
 	delete io;
 }
