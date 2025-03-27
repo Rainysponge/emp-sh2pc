@@ -77,10 +77,10 @@ convert_to_kb() {
     fi
 }
 
-convert_to_ps() {
+convert_to_ms() {
     local times=$1
     if [ "$times" -gt 13000 ]; then
-        echo "$((times / 1000)) ps"
+        echo "$((times / 1000000)) ms"
     else
         echo "$times ns"
     fi

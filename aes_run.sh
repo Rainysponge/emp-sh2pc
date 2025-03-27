@@ -76,10 +76,10 @@ convert_to_kb() {
     fi
 }
 
-convert_to_ps() {
+convert_to_ms() {
     local times=$1
     if [ "$times" -gt 13000 ]; then
-        echo "$((times / 1000)) ps"
+        echo "$((times / 1000)) ms"
     else
         echo "$times ns"
     fi
@@ -92,15 +92,15 @@ echo "  Send Rounds: $total_send_rounds_1"
 echo "  Recv Rounds: $total_recv_rounds_1"
 echo "  Send Bytes: $(convert_to_kb $total_send_bytes_1)"
 echo "  Recv Bytes: $(convert_to_kb $total_recv_bytes_1)"
-echo "  Time for Reading File and Creating Circuits: $(convert_to_ps $total_reading_time_1)"
-echo "  Time for Computation: $(convert_to_ps $total_computation_time_1)"
+echo "  Time for Reading File and Creating Circuits: $(convert_to_ms $total_reading_time_1)"
+echo "  Time for Computation: $(convert_to_ms $total_computation_time_1)"
 echo "Party 2:"
 echo "  Send Rounds: $total_send_rounds_2"
 echo "  Recv Rounds: $total_recv_rounds_2"
 echo "  Send Bytes: $(convert_to_kb $total_send_bytes_2)"
 echo "  Recv Bytes: $(convert_to_kb $total_recv_bytes_2)"
-echo "  Time for Reading File and Creating Circuits: $(convert_to_ps $total_reading_time_2)"
-echo "  Time for Computation: $(convert_to_ps $total_computation_time_2)"
+echo "  Time for Reading File and Creating Circuits: $(convert_to_ms $total_reading_time_2)"
+echo "  Time for Computation: $(convert_to_ms $total_computation_time_2)"
 
 {
     echo "Emp-tool AES Total Results after 100 Iterations:"
@@ -109,15 +109,15 @@ echo "  Time for Computation: $(convert_to_ps $total_computation_time_2)"
     echo "  Recv Rounds: $total_recv_rounds_1"
     echo "  Send Bytes: $(convert_to_kb $total_send_bytes_1)"
     echo "  Recv Bytes: $(convert_to_kb $total_recv_bytes_1)"
-    echo "  Time for Reading File and Creating Circuits: $(convert_to_ps $total_reading_time_1)"
-    echo "  Time for Computation: $(convert_to_ps $total_computation_time_1)"
+    echo "  Time for Reading File and Creating Circuits: $(convert_to_ms $total_reading_time_1)"
+    echo "  Time for Computation: $(convert_to_ms $total_computation_time_1)"
     echo "Party 2:"
     echo "  Send Rounds: $total_send_rounds_2"
     echo "  Recv Rounds: $total_recv_rounds_2"
     echo "  Send Bytes: $(convert_to_kb $total_send_bytes_2)"
     echo "  Recv Bytes: $(convert_to_kb $total_recv_bytes_2)"
-    echo "  Time for Reading File and Creating Circuits: $(convert_to_ps $total_reading_time_2)"
-    echo "  Time for Computation: $(convert_to_ps $total_computation_time_2)"
+    echo "  Time for Reading File and Creating Circuits: $(convert_to_ms $total_reading_time_2)"
+    echo "  Time for Computation: $(convert_to_ms $total_computation_time_2)"
 } > aes_result.log
 
 rm output1.log
