@@ -8,15 +8,15 @@ string file = circuit_file_location+"/bristol_fashion/aes_128.txt";
 
 
 vector<Bit> cat_vector(vector<Bit> key, vector<Bit> plaintext){
-	vector<Bit> result = key; // 先复制 key
-    result.insert(result.end(), plaintext.begin(), plaintext.end()); // 追加 plaintext
+	vector<Bit> result = key;
+    result.insert(result.end(), plaintext.begin(), plaintext.end());
     return result;
 }
 
 string bits2string(vector<Bit> bits){
 	string result;
     for (const Bit &b : bits) {
-        result += b.reveal<bool>() ? '1' : '0'; // 将 Bit 转换为 bool，并转换为字符
+        result += b.reveal<bool>() ? '1' : '0';
     }
     return result;
 }

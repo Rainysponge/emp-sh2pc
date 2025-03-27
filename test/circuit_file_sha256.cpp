@@ -10,15 +10,15 @@ string file = circuit_file_location+"/bristol_fashion/sha256.txt";
 
 
 vector<Bit> cat_vector(vector<Bit> key, vector<Bit> plaintext){
-	vector<Bit> result = key; // 先复制 key
-    result.insert(result.end(), plaintext.begin(), plaintext.end()); // 追加 plaintext
+	vector<Bit> result = key;
+    result.insert(result.end(), plaintext.begin(), plaintext.end());
     return result;
 }
 
 string bits2string(vector<Bit> bits){
 	string result;
     for (const Bit &b : bits) {
-        result += b.reveal<bool>() ? '1' : '0'; // 将 Bit 转换为 bool，并转换为字符
+        result += b.reveal<bool>() ? '1' : '0';
     }
     return result;
 }
@@ -43,10 +43,8 @@ string bits2hexString(vector<Bit> bits){
 string biString2hexString(string str) {
     stringstream ss;
     int len = str.length();
-    
-    // 补齐至8位的倍数
     while (len % 4 != 0) {
-        str = '0' + str;  // 在左侧补零
+        str = '0' + str;
         len++;
     }
     for (int i = 0; i < len; i += 4) {
@@ -68,7 +66,7 @@ void test() {
 	vector<Bit> message_block(512);
 	vector<Bit> hash_state(256);
     for (auto& bit : message_block) {
-        bit = (rand() % 2) == 1;  // 0或1的随机值
+        bit = (rand() % 2) == 1;
     }
     for (auto& bit : hash_state) {
         bit = (rand() % 2) == 1;
