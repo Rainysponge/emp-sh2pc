@@ -17,7 +17,7 @@ total_reading_time_2=0
 
 
 # 运行 100 次循环
-total=100 
+total=20 
 PROGRESS_WIDTH=20
 echo "==================================AES BEGIN========================================="
 for ((i=1; i<=total; i++)); do
@@ -39,13 +39,13 @@ for ((i=1; i<=total; i++)); do
     computation_time_1=$(grep "Time for Computation:" output1.log | awk '{print $4}' | tr -d ';')
     reading_time_1=$(grep "Time for Reading File and Creating Circuits:" output1.log | awk '{print $8}' | tr -d ';')
     send_rounds_1=$(grep "party 1: send rounds:" output1.log | awk '{print $5}' | tr -d ';')
-    recv_rounds_1=$(grep "recv rounds:" output1.log | awk '{print $5}' | tr -d ';')
+    recv_rounds_1=$(grep "recv rounds:" output1.log | awk '{print $8}' | tr -d ';')
     send_bytes_1=$(grep "party 1: send bytes:" output1.log | awk '{print $5}' | tr -d ';')
     recv_bytes_1=$(grep "recv bytes:" output1.log | awk '{print $5}' | tr -d ';')
     
     # 解析 party 2 数据（清理分号）
     send_rounds_2=$(grep "party 2: send rounds:" output2.log | awk '{print $5}' | tr -d ';')
-    recv_rounds_2=$(grep "recv rounds:" output2.log | awk '{print $5}' | tr -d ';')
+    recv_rounds_2=$(grep "recv rounds:" output2.log | awk '{print $8}' | tr -d ';')
     send_bytes_2=$(grep "party 2: send bytes:" output2.log | awk '{print $5}' | tr -d ';')
     recv_bytes_2=$(grep "recv bytes:" output2.log | awk '{print $5}' | tr -d ';')
     computation_time_2=$(grep "Time for Computation:" output2.log | awk '{print $4}' | tr -d ';')
@@ -118,7 +118,7 @@ echo "  Time for Computation: $(convert_to_ps $total_computation_time_2)"
     echo "  Recv Bytes: $(convert_to_kb $total_recv_bytes_2)"
     echo "  Time for Reading File and Creating Circuits: $(convert_to_ps $total_reading_time_2)"
     echo "  Time for Computation: $(convert_to_ps $total_computation_time_2)"
-} > sha256_result.log
+} > aes_result.log
 
 rm output1.log
 rm output2.log
