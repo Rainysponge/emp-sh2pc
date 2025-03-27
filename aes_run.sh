@@ -17,7 +17,7 @@ total_reading_time_2=0
 
 
 # 运行 100 次循环
-total=20 
+total=100
 PROGRESS_WIDTH=20
 echo "==================================AES BEGIN========================================="
 for ((i=1; i<=total; i++)); do
@@ -78,7 +78,7 @@ convert_to_kb() {
 
 convert_to_ms() {
     local times=$1
-    if [ "$times" -gt 13000 ]; then
+    if [ "$times" -gt 100000000 ]; then
         echo "$((times / 1000000)) ms"
     else
         echo "$times ns"
