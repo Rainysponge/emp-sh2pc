@@ -34,6 +34,8 @@
 # Test AES128 & SHA256
 `bash test_aes_sha256.sh`
 
+![](https://raw.githubusercontent.com/Rainysponge/Figurebed/main/img/20250331164424.png)
+
 ### Question
 Please send email to wangxiao@cs.northwestern.edu
 
