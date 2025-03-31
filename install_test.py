@@ -52,13 +52,19 @@ args = parser.parse_args()
 if vars(args)['install'] or vars(args)['deps']:
 	subprocess.call(["bash", "-c", install_packages])
 
+for k in ['tool']:
+	if vars(args)[k]:
+		template = install_template_test.replace("X", "emp-"+k).replace("Y", vars(args)[k])
+		print(template)
+		subprocess.call(["bash", "-c", template])
+
 for k in ['ot', 'zk', 'ag2pc', 'agmpc']:
 	if vars(args)[k]:
 		template = install_template.replace("X", "emp-"+k).replace("Y", vars(args)[k])
 		print(template)
 		subprocess.call(["bash", "-c", template])
 
-for k in ['tool', 'sh2pc']:
+for k in ['sh2pc']:
 	if vars(args)[k]:
 		template = install_template_test.replace("X", "emp-"+k).replace("Y", vars(args)[k])
 		print(template)
