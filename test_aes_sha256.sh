@@ -6,5 +6,4 @@ cmake ..
 make
 cd ..
 bash aes_run.sh
-
 bash sha256_run.sh
